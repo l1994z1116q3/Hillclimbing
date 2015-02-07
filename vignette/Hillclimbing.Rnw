@@ -1,0 +1,107 @@
+\documentclass{article}
+
+\title{A Replication of Local Hillclimbing on an Economic Landscape}
+\author{Ziqi Lu '18}
+\date{February 8, 2015}
+
+\begin{document}
+\SweaveOpts{concordance=TRUE}
+
+\maketitle
+
+\pagebreak
+
+\section{Abstract}
+
+Profit maximization is difficult because the profit function in the real world is complicated and hard to be maximized. The article "Local Hillclimbing on an Economic Landscape" by David Kane proposes that such profit function can be approximated by a polynomial, when the number of inputs is specified. We can then approach local maximums of such polynomial by carefully changing the inputs and gradually raising the output of the profit function. We make simulations for different strategies that raise outputs and compare the local maximums that are reached by different strategies. The implication of the results is that across all the cases, a firm can reach its highest local maximum by employing aggressive strategy, namely, choose the most profitable input whenever the firm sees it. However, when we penalize the firms using fewer kinds of inputs, the more conservative strategy becomes more and more profitable.
+
+\section{Introduction}
+
+It has been long that a linear or log linear function is used to approach a firm's profit function, and the profit maximizing point can be calculated directly. Such function is always under strict assumptions and only consider some of the major aspects of a firm. However, the real world is so complicated that it is hard to catch all the major aspects of a firm in a single function, and even harder to calculate the maximum profit given such a complicated function.
+
+In David Kane's article "local Hillclimbing on an Economic Landscape," he proposes that, since every function can be approached with a polynomial, we can approach the profit function of a firm, given all the inputs that we are going to consider. We can then carefully investigate the features of such polynomial. Since we are approaching a profit function that is supposed to capture all the major aspects of production, our investigation on such polynomial can reflect some aspects about the real-world profit maximization.
+
+David Kane proposes that we can look for local maximums in different ways and compare those ways with each other. We then find out the best way to reach local maximum, and in the real world we can pursue profit in such way. There are three ways to choose the transference between inputs and look for local maximum. The first one is to choose the one that increases the output most (steepest strategy), the second one is to choose the median one (median strategy), and the last one is to choose the least one (least strategy).
+
+The result is that the average local maximum is the highest for the least strategy when it is extremely hard to transfer inputs between each other. On the other hand, the maximum becomes highest for the steepest strategy when transference between inputs is less limited. As the transference between inputs is freer in the real world, the firm could simply choose the most profitable way to raise profit. However, when firms favor specialization and are penalized for fewer kinds of inputs, the least strategy gains an upper hand again. That is, least strategy favors a diversity of inputs.
+
+\section{Definition and Theory}
+
+\subsection{Definition 1}
+The profit function with n inputs is defined as
+$$ \Pi (X) = c_1x_1 + c_2x_2 +...+ c_nx_n + c_{n+1}x^2_1 + c_{n+2}x^2_2 + ...+ c_{2n}x^2_n + c_{2n+1}x_1x_2 + c_{2n+2}x_1x_3 + ... + c_{n(n+3)/2}x_{n-1}x_{n}$$
+
+with the boundaries
+
+$$ X = \{x : x = x_1,x_2,...,x_n \  with \  x_i \in \{0,1,2…\}\}\  s.t.\  \Sigma ^N_{i=1} x_i = B \in \{0,1,2,...\}\  and\  with\  c_i \in [-1,1]. $$
+
+\subsection{Definition 2}
+Connection: the furthest distance that we can transfer a unit of expenditure from one input to another. For example, when connection is 1, every time we can only transfer a unit from $x_k$ to $x_{k+1}$. When connection is 2, we can transfer from $x_k$ to either one of $x_{k+1}$ or $x_{k+2}$.
+
+\subsection{Method}
+
+It is very hard to find the maximum of the profit function defined above. While it is hard to find the absolute maximum, we can find the local maximum by "hill climbing." Given a fixed number of inputs and total expenditure, we first start from a random set of inputs. Each time we transfer a unit from an input into another and write down the profit after such change. For each single point, we look at all the possible transferences and choose one of those that can raise total profit. Finally when all the available transferences can only reduce total profit, the current set of inputs yields maximum profit.
+
+I replicate David Kane's results in the same way. Three strategies are studied, and each strategy is studied in five different environments. The first strategy is to choose the one that increases the output most in every step (steepest strategy), the second one is to choose the median one (median strategy), and the last one is to choose the least one in every step (least strategy). Every strategy is studied when the number of connection is 1, 2, 3, 4 or 5.
+
+The parameters of the profit functions are also changed. Three sets of parameters are employed. For the first set, each parameter is randomly chosen between [-1,1]. The second set is created such that there is penalty for using too many kinds of inputs. The coefficients of linear and square terms are between [0,1] and the coefficients for the cross products are between [-1,0]. The third set is created such that it is encouraged to use different kinds of inputs. The coefficients for the linear terms are 0, for the square terms are between [-19,0], and for the cross products are between [0,1]. I did three hundred trials for each of the three strategies under each set of parameters, and parameters are randomized after each trial so that the result will not be biased by special cases for coefficients.
+
+\section{Results and Implication}
+
+Table 1 is the average of the three hundred trials for the first set of coefficients. Compared to the original paper by David Kane, the standard deviations in my paper is significantly larger (about ten times), and the result is the reverse. That is, the steepest ascent earns the highest local maximum in average, and the least ascent performs worst.
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{rllllll}
+  \hline
+ & Strategy & C.1 & C.2 & C.3 & C.4 & C.5 \\
+  \hline
+1 & Steepest Ascent & 8.1 (6.2) & 9.8 (5.8) & 11.3 (5.4) & 12.8 (5.6) & 13.3 (5.4) \\
+  2 & Median Ascent & 7.4 (5.9) & 9.6 (5.5) & 12.3 (5.2) & 11.6 (4.9) & 11.7 (4.5) \\
+  3 & Least Ascent  & 7.8 (5.6) & 9.9 (5.0) & 10.8 (4.2) & 11.1 (4.5) & 13.0 (4.9) \\
+   \hline
+\end{tabular}
+\caption{Mean local maximums for the profit function over 300 different trials. Results are divided by 100 to make the table easier to read. Ciefficients are randomly chosen between [-1,1]. Standard deviations in parentheses.}
+\end{table}
+
+Table 2 repeats the whole process for as many times with the second set of coefficients, and the same trend is shown.
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{rllllll}
+  \hline
+ & Strategy & C.1 & C.2 & C.3 & C.4 & C.5 \\
+  \hline
+1 & Steepest Ascent & 5.7 (5.5) & 8.1 (5.4) & 9.2 (6.1) & 9.3 (6.1) & 9.9 (6.3) \\
+  2 & Median Ascent & 6.5 (5.9) & 7.8 (6.0) & 8.1 (5.9) & 8.2 (6.0) & 8.9 (5.3) \\
+  3 & Least Ascent  & 6.7 (5.4) & 7.4 (5.4) & 8.2 (4.5) & 8.2 (5.8) & 8.6 (5.5) \\
+   \hline
+\end{tabular}
+\caption{Mean local maximums for the profit function over 300 different trials. Ciefficients for linear and square terns are randomly chosen between [0,1] and the coefficients for cross products are between [-1,0]. Standard deviations in parentheses.}
+\end{table}
+
+In Table 3, we can see that the differences between the least strategy and the steepest ascent is getting smaller. Nonetheless, as the number of connection increases, the least ascent yields its way to the steepest ascent. Compared to Table 1, we find that Table 3 is more similar to David Kane's result that the least ascent. It might be the case that in the original paper, each set of coefficients is not changed for all of the three ascents until the whole table is generated, and the coefficients of the cross products happen to be significantly higher, which resembles the case in my Table 3.
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{rllllll}
+  \hline
+ & Strategy & C.1 & C.2 & C.3 & C.4 & C.5 \\
+  \hline
+1 & Steepest Ascent & -3.7 (5.1) & 2.7 (2.9) & 5.2 (2.4) & 5.6 (2.5) & 6.0 (2.4) \\
+  2 & Median Ascent & -3.0 (5.2) & 3.3 (2.9) & 5.5 (2.4) & 5.6 (2.6) & 5.7 (2.4) \\
+  3 & Least Ascent  & -2.4 (4.9) & 4.7 (2.4) & 5.6 (2.4) & 6.2 (2.6) & 6.0 (2.7) \\
+   \hline
+\end{tabular}
+\caption{Mean local maximums for the profit function over 300 different trials. Ciefficients for linear terms are zero, for square terns are between [-19,0], and for cross products are between [0,2]. Standard deviations in parentheses.}
+\end{table}
+
+The implication of my results is that, when a firm is flexible in switching its expenditures between different inputs, or when a firm is not highly benefited from a combination of different inputs, such firm should choose the steepest ascent. On the other hand, when a firm cannot change its inputs as flexible but the firm benefits from a combination of a variety of inputs, the firm should follow the least ascent.
+
+\section{conclusion}
+
+In this paper. I replicate the results in "Local Hillclimbing on an Economic Landscape" by David Kane. The paper investigates the profit maximizing strategies with the "hillclimbing" method, which is to approach the maximum profit step by step. Then the paper compares different ways to choose the next step, in other words different strategies to reach the local maximum of a profit function. He compares three strategies. The first one is to choose the most profitable step every time, the second one is to choose the median among all the available steps, and the third one is to choose the least among the available steps and approach the local maximum slowly.
+
+The profit function here is generalized into an expansion of polynomial, and I randomize the coefficients to approach different kinds of profit functions, as David Kane does. Also, different intervals are assigned to the linear terms, square terms and cross products when the strategies are compared. The result is that the average local maximum is the highest for the least strategy when it is extremely hard to transfer inputs between each other. On the other hand, the maximum becomes highest for the steepest strategy when transference between inputs is less limited. As the transference between inputs is freer in the real world, the firm could simply choose the most profitable way to raise profit. However, when firms favor specialization and are penalized for fewer kinds of inputs, the least strategy gains an upper hand again. That is, least strategy favors a diversity of inputs.
+
+\end{document}

@@ -17,6 +17,9 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+# disregard Rproj files
+.Rproj.user
+
 # =========================
 # Operating System Files
 # =========================
