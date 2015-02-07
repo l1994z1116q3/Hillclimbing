@@ -1,12 +1,12 @@
 Package: Hillclimbing
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Hillclimbing Strategy
 Version: 0.1
-Date: 2015-01-21
-Author: Who wrote it
-Maintainer: Who to complain to <yourfault@somewhere.net>
-Description: More about what it does (maybe more than one line)
-License: What license is it under?
+Date: 2015-02-06
+Author: Ziqi Lu
+Maintainer: <zl1@williams.edu>
+Description: This package can evaluate polynomials, and randomly generate complicated polynomials and evaluate their local maximums.
+License: Nope.
 LazyData: TRUE
 Depends:
     dplyr
